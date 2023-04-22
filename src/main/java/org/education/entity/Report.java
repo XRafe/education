@@ -2,13 +2,16 @@ package org.education.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Report {
     @Id
     @SequenceGenerator(name = "seq_report_id",
@@ -22,6 +25,7 @@ public class Report {
 
     private Integer rating;
 
+    @CreationTimestamp
     private Instant createdAt;
 
     @ManyToOne
@@ -38,9 +42,8 @@ public class Report {
     @Column(name = "cource_id")
     private Integer courceId;
 
-    public Report(String text, Integer rating, Instant createdAt) {
+    public Report(String text, Integer rating) {
         this.text = text;
         this.rating = rating;
-        this.createdAt = createdAt;
     }
 }

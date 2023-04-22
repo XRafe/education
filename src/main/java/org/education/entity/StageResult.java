@@ -1,8 +1,14 @@
 package org.education.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class StageResult {
 
     @Id
@@ -33,5 +39,9 @@ public class StageResult {
     @Column(name = "stage_id")
     private Integer stageId;
 
-
+    public StageResult(Integer score, String isDone, String answer) {
+        this.score = score;
+        this.isDone = isDone;
+        this.answer = answer;
+    }
 }

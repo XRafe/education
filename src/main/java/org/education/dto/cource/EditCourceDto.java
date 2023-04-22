@@ -16,9 +16,9 @@ public class EditCourceDto {
 
 
     public EditCourceDto(@JsonProperty("title") String title,
-                           @JsonProperty("info") String info,
-                           @JsonProperty("imageUrl") String imageUrl,
-                           @JsonProperty("direction") String direction) {
+                         @JsonProperty("info") String info,
+                         @JsonProperty("imageUrl") String imageUrl,
+                         @JsonProperty("direction") String direction) {
         this.title = title;
         this.info = info;
         this.imageUrl = imageUrl;

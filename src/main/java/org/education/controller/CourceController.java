@@ -6,7 +6,6 @@ import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
 import org.education.service.CourceService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

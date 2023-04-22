@@ -19,6 +19,7 @@ public class ModuleServiceImpl implements ModuleService {
     private final ModuleRepository moduleRepository;
     private final CourceRepository courceRepository;
     private final ModuleMapper moduleMapper;
+
     @Override
     public Integer createModule(Integer courceId, CreateModuleDto createModule) {
         Module module = new Module(
@@ -36,11 +37,17 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public ModuleDto editModule(Integer id, EditModuleDto editModule) {
-        return null;
+        Module module = moduleRepository.findById(id).orElseThrow();
+
+
+        moduleRepository.saveAndFlush(module);
+
+        return moduleMapper.mapModuleToModuleDto(module);
     }
 
     @Override
     public ModuleDto getModuleById(Integer id) {
-        return null;
+        Module module = moduleRepository.findById(id).orElseThrow();
+        return moduleMapper.mapModuleToModuleDto(module);
     }
 }

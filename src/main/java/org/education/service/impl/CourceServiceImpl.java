@@ -53,6 +53,8 @@ public class CourceServiceImpl implements CourceService {
         cource.setImageUrl(editCource.getImageUrl());
         cource.setDirection(editCource.getDirection());
 
+        courceRepository.saveAndFlush(cource);
+
         return courceMapper.mapCourceToCourceDto(cource);
     }
 }

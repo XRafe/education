@@ -7,22 +7,25 @@ import org.education.dto.stage.StageDto;
 import org.education.service.StageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/stage")
 @RequiredArgsConstructor
 public class StageController {
 
     private final StageService stageService;
-    @PostMapping("/create")
-    public Integer createStage(CreateStageDto createStageDto) {
-        return stageService.createStage(createStageDto);
+
+    @PostMapping("module/{moduleId}/stage/create")
+    public Integer createStage(@PathVariable("moduleId") Integer moduleId, CreateStageDto createStageDto) {
+        return stageService.createStage(moduleId, createStageDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("module/stage/{id}/edit")
     public ResponseEntity<StageDto> editStage(@PathVariable("id") Integer id,
-                                             EditStageDto editStageDto) {
+                                              EditStageDto editStageDto) {
         return new ResponseEntity<>(stageService.editStage(id, editStageDto), HttpStatus.OK);
     }
 
