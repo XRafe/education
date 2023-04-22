@@ -16,4 +16,11 @@ public class Chat {
     @OneToOne
     @JoinColumn(name = "cource_id", insertable = false, updatable = false)
     private Cource cource;
+
+    @Column(name = "cource_id")
+    private Integer courceId;
+
+    public Chat(Cource cource) {
+        this.cource = cource;
+    }
 }

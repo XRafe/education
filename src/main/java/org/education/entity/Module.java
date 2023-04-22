@@ -1,8 +1,12 @@
 package org.education.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Module {
 
     @Id
@@ -25,4 +29,10 @@ public class Module {
 
     @Column(name = "cource_id")
     private Integer courceId;
+
+    public Module(String title, String info, String score) {
+        this.title = title;
+        this.info = info;
+        this.score = score;
+    }
 }

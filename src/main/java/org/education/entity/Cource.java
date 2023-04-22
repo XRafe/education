@@ -1,8 +1,12 @@
 package org.education.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Cource {
 
     @Id
@@ -31,4 +35,13 @@ public class Cource {
 
     @Column(name = "creator_id")
     private Integer creatorId;
+
+    public Cource(String title, String info, String imageUrl, String usersCount, String rating, String direction) {
+        this.title = title;
+        this.info = info;
+        this.imageUrl = imageUrl;
+        this.usersCount = usersCount;
+        this.rating = rating;
+        this.direction = direction;
+    }
 }

@@ -1,0 +1,46 @@
+package org.education.service.impl;
+
+import lombok.RequiredArgsConstructor;
+import org.education.dto.module.CreateModuleDto;
+import org.education.dto.module.EditModuleDto;
+import org.education.dto.module.ModuleDto;
+import org.education.entity.Cource;
+import org.education.entity.Module;
+import org.education.repository.CourceRepository;
+import org.education.repository.ModuleRepository;
+import org.education.service.ModuleService;
+import org.education.service.mapper.ModuleMapper;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class ModuleServiceImpl implements ModuleService {
+
+    private final ModuleRepository moduleRepository;
+    private final CourceRepository courceRepository;
+    private final ModuleMapper moduleMapper;
+    @Override
+    public Integer createModule(Integer courceId, CreateModuleDto createModule) {
+        Module module = new Module(
+                createModule.getTitle(),
+                createModule.getInfo(),
+                createModule.getInfo());
+
+        Cource cource = courceRepository.findById(courceId).orElseThrow();
+
+        module.setCource(cource);
+        module = moduleRepository.saveAndFlush(module);
+
+        return module.getId();
+    }
+
+    @Override
+    public ModuleDto editModule(Integer id, EditModuleDto editModule) {
+        return null;
+    }
+
+    @Override
+    public ModuleDto getModuleById(Integer id) {
+        return null;
+    }
+}
