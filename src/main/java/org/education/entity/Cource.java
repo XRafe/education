@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -37,6 +39,12 @@ public class Cource {
 
     @Column(name = "creator_id")
     private Integer creatorId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Module> modules;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<UserCources> userCources;
 
     public Cource(String title, String info, String imageUrl, String usersCount,
                   Integer rating, String direction, Integer creatorId) {

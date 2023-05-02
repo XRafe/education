@@ -7,11 +7,12 @@ import org.education.dto.cource.CourceDto;
 import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
 import org.education.jwt.ActionWithJwt;
-import org.education.service.ChatService;
 import org.education.service.CourceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cource")
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 public class CourceController {
 
     private final CourceService courceService;
-    private final ChatService chatService;
     private final ActionWithJwt actionWithJwt;
     private final ActionWithCookie actionWithCookie;
 
@@ -40,5 +40,18 @@ public class CourceController {
     public ResponseEntity<CourceDto> editCource(@PathVariable("id") Integer id,
                                                 EditCourceDto editCourceDto) {
         return new ResponseEntity<>(courceService.editCource(id, editCourceDto), HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public List<CourceDto> getList() {
+        return courceService.getList();
+    }
+
+    @GetMapping("/my/list")
+    public List<CourceDto> getAllByUserId(HttpServletRequest httpServletRequest) {
+        String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
+        String email = actionWithJwt.getEmailByToken(token);
+
+        return courceService.getAllByUserId(email);
     }
 }

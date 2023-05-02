@@ -9,4 +9,6 @@ public interface StageService {
 
     StageDto editStage(Integer id, EditStageDto editStage);
 
+    void deleteStage(Integer id);
+
 }

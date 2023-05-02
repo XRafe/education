@@ -9,8 +9,7 @@ public class ModuleDto {
 
     private final Integer id;
     private final String title;
-
     private final String info;
-
     private final Integer score;
+
 }

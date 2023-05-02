@@ -4,22 +4,23 @@ import lombok.RequiredArgsConstructor;
 import org.education.dto.cource.CourceDto;
 import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
-import org.education.entity.Chat;
 import org.education.entity.Cource;
 import org.education.entity.User;
-import org.education.repository.ChatRepository;
 import org.education.repository.CourceRepository;
 import org.education.repository.UserRepository;
+import org.education.service.ChatService;
 import org.education.service.CourceService;
 import org.education.service.mapper.CourceMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CourceServiceImpl implements CourceService {
 
     private final CourceRepository courceRepository;
-    private final ChatRepository chatRepository;
+    private final ChatService chatService;
     private final UserRepository userRepository;
     private final CourceMapper courceMapper;
 
@@ -37,7 +38,7 @@ public class CourceServiceImpl implements CourceService {
 
         cource = courceRepository.saveAndFlush(cource);
 
-        chatRepository.saveAndFlush(new Chat(cource.getId()));
+        chatService.createChat(cource.getId());
 
         return cource.getId();
     }
@@ -61,5 +62,19 @@ public class CourceServiceImpl implements CourceService {
         courceRepository.saveAndFlush(cource);
 
         return courceMapper.mapCourceToCourceDto(cource);
+    }
+
+    @Override
+    public List<CourceDto> getList() {
+        List<Cource> list = courceRepository.findAll();
+        return courceMapper.mapCourceToCourceDto(list);
+    }
+
+    @Override
+    public List<CourceDto> getAllByUserId(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+
+        List<Cource> list = courceRepository.findAllByUserId(user.getId());
+        return courceMapper.mapCourceToCourceDto(list);
     }
 }

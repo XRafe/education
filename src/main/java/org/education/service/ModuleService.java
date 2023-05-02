@@ -11,4 +11,6 @@ public interface ModuleService {
     ModuleDto editModule(Integer id, EditModuleDto editModule);
 
     ModuleDto getModuleById(Integer id);
+
+    void deleteModule(Integer id);
 }

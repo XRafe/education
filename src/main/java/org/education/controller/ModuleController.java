@@ -30,4 +30,9 @@ public class ModuleController {
     public ModuleDto getModuleById(@PathVariable("id") Integer id) {
         return moduleService.getModuleById(id);
     }
+
+    @DeleteMapping("cource/module/{id}/delete")
+    public void deleteModule(@PathVariable("id") Integer id) {
+        moduleService.deleteModule(id);
+    }
 }

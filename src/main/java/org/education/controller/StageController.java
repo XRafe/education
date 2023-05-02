@@ -7,10 +7,7 @@ import org.education.dto.stage.StageDto;
 import org.education.service.StageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,5 +26,8 @@ public class StageController {
         return new ResponseEntity<>(stageService.editStage(id, editStageDto), HttpStatus.OK);
     }
 
-
+    @DeleteMapping("module/stage/{id}/delete")
+    public void deleteStage(@PathVariable("id") Integer id) {
+        stageService.deleteStage(id);
+    }
 }

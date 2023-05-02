@@ -45,4 +45,9 @@ public class ModuleServiceImpl implements ModuleService {
         Module module = moduleRepository.findById(id).orElseThrow();
         return moduleMapper.mapModuleToModuleDto(module);
     }
+
+    @Override
+    public void deleteModule(Integer id) {
+        moduleRepository.deleteById(id);
+    }
 }

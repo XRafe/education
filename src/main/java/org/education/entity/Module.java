@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -31,6 +33,10 @@ public class Module {
 
     @Column(name = "cource_id")
     private Integer courceId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Stage> stages;
+
 
     public Module(String title, String info, Integer score, Integer courceId) {
         this.title = title;

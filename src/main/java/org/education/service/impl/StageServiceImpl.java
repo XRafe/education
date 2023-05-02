@@ -45,4 +45,9 @@ public class StageServiceImpl implements StageService {
 
         return stageMapper.mapStageToStageDto(stage);
     }
+
+    @Override
+    public void deleteStage(Integer id) {
+        stageRepository.deleteById(id);
+    }
 }
