@@ -8,6 +8,7 @@ import java.time.Instant;
 @Getter
 @RequiredArgsConstructor
 public class ReportDto {
+    private final Integer id;
     private final String text;
 
     private final Integer rating;

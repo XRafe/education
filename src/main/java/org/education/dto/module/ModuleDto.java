@@ -7,9 +7,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ModuleDto {
 
+    private final Integer id;
     private final String title;
 
     private final String info;
 
-    private final String score;
+    private final Integer score;
 }

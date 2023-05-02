@@ -39,9 +39,11 @@ public class StageResult {
     @Column(name = "stage_id")
     private Integer stageId;
 
-    public StageResult(Integer score, String isDone, String answer) {
+    public StageResult(Integer score, String isDone, String answer, Integer userId, Integer stageId) {
         this.score = score;
         this.isDone = isDone;
         this.answer = answer;
+        this.userId = userId;
+        this.stageId = stageId;
     }
 }

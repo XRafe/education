@@ -23,7 +23,7 @@ public class Module {
 
     private String info;
 
-    private String score;
+    private Integer score;
 
     @ManyToOne
     @JoinColumn(name = "cource_id", insertable = false, updatable = false)
@@ -32,9 +32,10 @@ public class Module {
     @Column(name = "cource_id")
     private Integer courceId;
 
-    public Module(String title, String info, String score) {
+    public Module(String title, String info, Integer score, Integer courceId) {
         this.title = title;
         this.info = info;
         this.score = score;
+        this.courceId = courceId;
     }
 }

@@ -6,8 +6,10 @@ import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
 import org.education.entity.Chat;
 import org.education.entity.Cource;
+import org.education.entity.User;
 import org.education.repository.ChatRepository;
 import org.education.repository.CourceRepository;
+import org.education.repository.UserRepository;
 import org.education.service.CourceService;
 import org.education.service.mapper.CourceMapper;
 import org.springframework.stereotype.Service;
@@ -18,21 +20,24 @@ public class CourceServiceImpl implements CourceService {
 
     private final CourceRepository courceRepository;
     private final ChatRepository chatRepository;
+    private final UserRepository userRepository;
     private final CourceMapper courceMapper;
 
     @Override
-    public Integer createCourceWithChat(CreateCourceDto createCource) {
+    public Integer createCourceWithChat(CreateCourceDto createCource, String emailUser) {
+        User user = userRepository.findByEmail(emailUser).orElseThrow();
         Cource cource = new Cource(
                 createCource.getTitle(),
                 createCource.getInfo(),
                 createCource.getImageUrl(),
                 createCource.getUsersCount(),
                 createCource.getRating(),
-                createCource.getDirection());
+                createCource.getDirection(),
+                user.getId());
 
         cource = courceRepository.saveAndFlush(cource);
 
-        chatRepository.saveAndFlush(new Chat(cource));
+        chatRepository.saveAndFlush(new Chat(cource.getId()));
 
         return cource.getId();
     }

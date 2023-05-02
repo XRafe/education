@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StageDto {
 
+    private final Integer id;
     private final String title;
 
     private final String info;
@@ -15,5 +16,5 @@ public class StageDto {
 
     private final String type;
 
-    private final String score;
+    private final Integer score;
 }

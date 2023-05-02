@@ -9,13 +9,13 @@ public class CreateModuleDto {
 
     private final String info;
 
-    private final String score;
+    private final Integer score;
 
     private final Integer courceId;
 
     public CreateModuleDto(@JsonProperty("title") String title,
                            @JsonProperty("info") String info,
-                           @JsonProperty("score") String score,
+                           @JsonProperty("score") Integer score,
                            @JsonProperty("courceId") Integer courceId) {
         this.title = title;
         this.info = info;

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CourceDto {
 
+    private final Integer id;
     private final String title;
 
     private final String info;
@@ -15,7 +16,7 @@ public class CourceDto {
 
     private final String usersCount;
 
-    private final String rating;
+    private final Integer rating;
 
     private final String direction;
 }

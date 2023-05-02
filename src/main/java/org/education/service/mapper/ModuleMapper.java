@@ -9,6 +9,7 @@ public class ModuleMapper {
 
     public ModuleDto mapModuleToModuleDto(Module module) {
         return new ModuleDto(
+                module.getId(),
                 module.getTitle(),
                 module.getInfo(),
                 module.getScore()

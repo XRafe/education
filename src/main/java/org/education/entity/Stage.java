@@ -27,7 +27,7 @@ public class Stage {
 
     private String type;
 
-    private String score;
+    private Integer score;
 
     @ManyToOne
     @JoinColumn(name = "module_id", insertable = false, updatable = false)
@@ -36,11 +36,12 @@ public class Stage {
     @Column(name = "module_id")
     private Integer moduleId;
 
-    public Stage(String title, String info, String data, String type, String score) {
+    public Stage(String title, String info, String data, String type, Integer score, Integer moduleId) {
         this.title = title;
         this.info = info;
         this.data = data;
         this.type = type;
         this.score = score;
+        this.moduleId = moduleId;
     }
 }

@@ -26,7 +26,7 @@ public class Chat {
     @Column(name = "cource_id")
     private Integer courceId;
 
-    public Chat(Cource cource) {
-        this.cource = cource;
+    public Chat(Integer courceId) {
+        this.courceId = courceId;
     }
 }

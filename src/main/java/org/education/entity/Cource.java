@@ -27,7 +27,7 @@ public class Cource {
 
     private String usersCount;
 
-    private String rating;
+    private Integer rating;
 
     private String direction;
 
@@ -38,12 +38,14 @@ public class Cource {
     @Column(name = "creator_id")
     private Integer creatorId;
 
-    public Cource(String title, String info, String imageUrl, String usersCount, String rating, String direction) {
+    public Cource(String title, String info, String imageUrl, String usersCount,
+                  Integer rating, String direction, Integer creatorId) {
         this.title = title;
         this.info = info;
         this.imageUrl = imageUrl;
         this.usersCount = usersCount;
         this.rating = rating;
         this.direction = direction;
+        this.creatorId = creatorId;
     }
 }

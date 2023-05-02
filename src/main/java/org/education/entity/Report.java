@@ -42,8 +42,10 @@ public class Report {
     @Column(name = "cource_id")
     private Integer courceId;
 
-    public Report(String text, Integer rating) {
+    public Report(String text, Integer rating, Integer userId, Integer courceId) {
         this.text = text;
         this.rating = rating;
+        this.userId = userId;
+        this.courceId = courceId;
     }
 }

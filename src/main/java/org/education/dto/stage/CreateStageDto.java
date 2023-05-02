@@ -14,13 +14,13 @@ public class CreateStageDto {
 
     private final String type;
 
-    private final String score;
+    private final Integer score;
 
     public CreateStageDto(@JsonProperty("title") String title,
                           @JsonProperty("info") String info,
                           @JsonProperty("data") String data,
                           @JsonProperty("type") String type,
-                          @JsonProperty("score") String score) {
+                          @JsonProperty("score") Integer score) {
         this.title = title;
         this.info = info;
         this.data = data;

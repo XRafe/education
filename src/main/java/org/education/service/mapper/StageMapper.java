@@ -9,6 +9,7 @@ public class StageMapper {
 
     public StageDto mapStageToStageDto(Stage stage) {
         return new StageDto(
+                stage.getId(),
                 stage.getTitle(),
                 stage.getInfo(),
                 stage.getData(),

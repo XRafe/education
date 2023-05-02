@@ -5,7 +5,7 @@ import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
 
 public interface CourceService {
-    Integer createCourceWithChat(CreateCourceDto createCource);
+    Integer createCourceWithChat(CreateCourceDto createCource, String emailUser);
 
     CourceDto getCourceById(Integer id);
 

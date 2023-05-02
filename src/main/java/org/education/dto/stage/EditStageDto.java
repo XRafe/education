@@ -11,12 +11,12 @@ public class EditStageDto {
 
     private final String data;
 
-    private final String score;
+    private final Integer score;
 
     public EditStageDto(@JsonProperty("title") String title,
                         @JsonProperty("info") String info,
                         @JsonProperty("data") String data,
-                        @JsonProperty("score") String score) {
+                        @JsonProperty("score") Integer score) {
         this.title = title;
         this.info = info;
         this.data = data;

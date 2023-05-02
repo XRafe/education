@@ -9,6 +9,7 @@ public class ReportMapper {
 
     public ReportDto mapReportToReportDto(Report report) {
         return new ReportDto(
+                report.getId(),
                 report.getText(),
                 report.getRating(),
                 report.getCreatedAt()

@@ -12,6 +12,7 @@ public class CourceMapper {
 
     public CourceDto mapCourceToCourceDto(Cource cource) {
         return new CourceDto(
+                cource.getId(),
                 cource.getTitle(),
                 cource.getInfo(),
                 cource.getImageUrl(),

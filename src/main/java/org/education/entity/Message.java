@@ -34,4 +34,10 @@ public class Message {
 
     @Column(name = "chat_id")
     private Integer chatId;
+
+    public Message(String text, User user, Integer chatId) {
+        this.text = text;
+        this.user = user;
+        this.chatId = chatId;
+    }
 }
