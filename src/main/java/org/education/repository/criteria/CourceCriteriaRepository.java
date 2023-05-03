@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
-import org.education.dto.cource.CourceDto;
 import org.education.dto.cource.SubscribeCourceDto;
 import org.education.entity.Cource;
 import org.education.entity.User;
@@ -37,11 +36,11 @@ public class CourceCriteriaRepository {
         return userCources.getResultList()
                 .stream()
                 .map(m -> new SubscribeCourceDto(
-                m.getCourceId(),
-                m.getCource().getTitle(),
-                m.getCource().getImageUrl(),
-                m.getCource().getRating(),
-                m.getScores()
-        )).toList();
+                        m.getCourceId(),
+                        m.getCource().getTitle(),
+                        m.getCource().getImageUrl(),
+                        m.getCource().getRating(),
+                        m.getScores()
+                )).toList();
     }
 }

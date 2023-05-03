@@ -12,6 +12,10 @@ import org.education.repository.UserRepository;
 import org.education.service.ReportService;
 import org.education.service.mapper.ReportMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +26,7 @@ public class ReportServiceImpl implements ReportService {
     private final ReportMapper reportMapper;
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public ReportDto createReport(Integer courceId, CreateReportDto createReportDto, String emailUser) {
         User user = userRepository.findByEmail(emailUser).orElseThrow();
@@ -32,17 +37,26 @@ public class ReportServiceImpl implements ReportService {
                 courceId
         );
 
-        Cource cource = courceRepository.findById(courceId).orElseThrow();
-        report.setCource(cource);
-
         report = reportRepository.saveAndFlush(report);
+
+        AtomicInteger rating = new AtomicInteger();
+
+        List<Report> list = reportRepository.findAllByCourceId(courceId);
+        list.forEach(m -> rating.addAndGet(m.getRating()));
+
+        int finalRaiting = rating.get() / list.size();
+
+        Cource cource = courceRepository.findById(courceId).orElseThrow();
+        cource.setRating(finalRaiting);
+
+        courceRepository.saveAndFlush(cource);
 
         return reportMapper.mapReportToReportDto(report);
     }
 
     @Override
-    public ReportDto getReportsByCourceId(Integer id) {
-        Report report = reportRepository.findById(id).orElseThrow();
-        return reportMapper.mapReportToReportDto(report);
+    public List<ReportDto> getReportsByCourceId(Integer courceId) {
+        List<Report> list = reportRepository.findAllByCourceId(courceId);
+        return reportMapper.mapReportToReportDto(list);
     }
 }

@@ -14,4 +14,6 @@ public class ReportDto {
     private final Integer rating;
 
     private final Instant createdAt;
+
+    private final String name;
 }

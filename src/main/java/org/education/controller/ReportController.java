@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class ReportController {
@@ -32,8 +34,8 @@ public class ReportController {
         return new ResponseEntity<>(reportService.createReport(courceId, createReportDto, email), HttpStatus.OK);
     }
 
-    @GetMapping("/cource/report/{id}/edit")
-    public ReportDto getReportsByCourceId(@PathVariable("id") Integer id) {
-        return reportService.getReportsByCourceId(id);
+    @GetMapping("/cource/{courceId}/report/list")
+    public List<ReportDto> getReportsByCourceId(@PathVariable("courceId") Integer courceId) {
+        return reportService.getReportsByCourceId(courceId);
     }
 }
