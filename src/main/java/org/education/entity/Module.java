@@ -34,7 +34,7 @@ public class Module {
     @Column(name = "cource_id")
     private Integer courceId;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "module")
     private Set<Stage> stages;
 
 

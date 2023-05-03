@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.education.dto.module.CreateModuleDto;
 import org.education.dto.module.EditModuleDto;
 import org.education.dto.module.ModuleDto;
+import org.education.dto.module.ModuleWithStageDto;
 import org.education.service.ModuleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,12 +18,12 @@ public class ModuleController {
 
     private final ModuleService moduleService;
 
-    @PostMapping("cource/{idCource}/module/create")
-    public Integer createModule(@PathVariable("idCource") Integer courceId, CreateModuleDto createModuleDto) {
+    @PostMapping("cource/{courceId}/module/create")
+    public Integer createModule(@PathVariable("courceId") Integer courceId, CreateModuleDto createModuleDto) {
         return moduleService.createModule(courceId, createModuleDto);
     }
 
-    @PutMapping("cource/module/edit/{id}")
+    @PutMapping("cource/module/{id}/edit")
     public ResponseEntity<ModuleDto> editModule(@PathVariable("id") Integer id,
                                                 EditModuleDto editModuleDto) {
         return new ResponseEntity<>(moduleService.editModule(id, editModuleDto), HttpStatus.OK);
@@ -34,5 +37,10 @@ public class ModuleController {
     @DeleteMapping("cource/module/{id}/delete")
     public void deleteModule(@PathVariable("id") Integer id) {
         moduleService.deleteModule(id);
+    }
+
+    @GetMapping("cource/{courceId}/module/list")
+    public List<ModuleWithStageDto> getAllByCourceId(@PathVariable("courceId") Integer courceId) {
+        return moduleService.getAllByCourceId(courceId);
     }
 }

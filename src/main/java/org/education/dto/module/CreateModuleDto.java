@@ -11,15 +11,11 @@ public class CreateModuleDto {
 
     private final Integer score;
 
-    private final Integer courceId;
-
     public CreateModuleDto(@JsonProperty("title") String title,
                            @JsonProperty("info") String info,
-                           @JsonProperty("score") Integer score,
-                           @JsonProperty("courceId") Integer courceId) {
+                           @JsonProperty("score") Integer score) {
         this.title = title;
         this.info = info;
         this.score = score;
-        this.courceId = courceId;
     }
 }
