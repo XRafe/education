@@ -2,6 +2,7 @@ package org.education.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.education.dto.user.AuthenticatedUserDto;
+import org.education.dto.user.EditUserDto;
 import org.education.dto.user.RegistrationUserDto;
 import org.education.dto.user.UserDto;
 import org.education.entity.User;
@@ -42,6 +43,20 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
+    }
+
+    @Override
+    public void editUser(String email, EditUserDto editUserDto) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow();
+
+        user.setEmail(editUserDto.getEmail());
+        user.setName(editUserDto.getName());
+        user.setSecondName(editUserDto.getSecondName());
+        user.setPassword(editUserDto.getPassword());
+        user.setInfo(editUserDto.getInfo());
+
+        userRepository.saveAndFlush(user);
     }
 
 }

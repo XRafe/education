@@ -12,7 +12,7 @@ public class CreateCourceDto {
 
     private final String imageUrl;
 
-    private final String usersCount;
+    private final Integer usersCount;
 
     private final Integer rating;
 
@@ -22,7 +22,7 @@ public class CreateCourceDto {
     public CreateCourceDto(@JsonProperty("title") String title,
                            @JsonProperty("info") String info,
                            @JsonProperty("imageUrl") String imageUrl,
-                           @JsonProperty("usersCount") String usersCount,
+                           @JsonProperty("usersCount") Integer usersCount,
                            @JsonProperty("rating") Integer rating,
                            @JsonProperty("direction") String direction) {
         this.title = title;

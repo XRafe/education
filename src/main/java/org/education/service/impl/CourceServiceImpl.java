@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.education.dto.cource.CourceDto;
 import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
+import org.education.dto.cource.SubscribeCourceDto;
 import org.education.entity.Cource;
 import org.education.entity.User;
 import org.education.repository.CourceRepository;
 import org.education.repository.UserRepository;
+import org.education.repository.criteria.CourceCriteriaRepository;
 import org.education.service.ChatService;
 import org.education.service.CourceService;
 import org.education.service.mapper.CourceMapper;
@@ -23,6 +25,7 @@ public class CourceServiceImpl implements CourceService {
     private final ChatService chatService;
     private final UserRepository userRepository;
     private final CourceMapper courceMapper;
+    private final CourceCriteriaRepository courceCriteriaRepository;
 
     @Override
     public Integer createCourceWithChat(CreateCourceDto createCource, String emailUser) {
@@ -76,5 +79,11 @@ public class CourceServiceImpl implements CourceService {
 
         List<Cource> list = courceRepository.findAllByUserId(user.getId());
         return courceMapper.mapCourceToCourceDto(list);
+    }
+
+    @Override
+    public List<SubscribeCourceDto> getListSubscribeUser(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+        return courceCriteriaRepository.getListSubscribeUser(user.getId());
     }
 }

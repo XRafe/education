@@ -27,7 +27,7 @@ public class Cource {
 
     private String imageUrl;
 
-    private String usersCount;
+    private Integer usersCount;
 
     private Integer rating;
 
@@ -46,7 +46,7 @@ public class Cource {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<UserCources> userCources;
 
-    public Cource(String title, String info, String imageUrl, String usersCount,
+    public Cource(String title, String info, String imageUrl, Integer usersCount,
                   Integer rating, String direction, Integer creatorId) {
         this.title = title;
         this.info = info;

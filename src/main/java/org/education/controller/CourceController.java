@@ -6,6 +6,7 @@ import org.education.cookie.ActionWithCookie;
 import org.education.dto.cource.CourceDto;
 import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
+import org.education.dto.cource.SubscribeCourceDto;
 import org.education.jwt.ActionWithJwt;
 import org.education.service.CourceService;
 import org.springframework.http.HttpStatus;
@@ -53,5 +54,12 @@ public class CourceController {
         String email = actionWithJwt.getEmailByToken(token);
 
         return courceService.getAllByUserId(email);
+    }
+
+    @GetMapping("/subscribe/list")
+    public List<SubscribeCourceDto> getListSubscribeUser(HttpServletRequest httpServletRequest) {
+        String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
+        String email = actionWithJwt.getEmailByToken(token);
+        return courceService.getListSubscribeUser(email);
     }
 }

@@ -5,18 +5,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class CourceDto {
-
+public class SubscribeCourceDto {
     private final Integer id;
     private final String title;
-
-    private final String info;
-
     private final String imageUrl;
-
-    private final Integer usersCount;
-
     private final Integer rating;
-
-    private final String direction;
+    private final Integer scores;
 }

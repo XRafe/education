@@ -2,7 +2,7 @@ package org.education.service;
 
 public interface UserCourcesService {
 
-    void subscribeUserOnCource();
+    void subscribeUserOnCource(Integer courceId, String email);
 
-    void unsubscribeUserFromCource();
+    void unsubscribeUserFromCource(Integer courceId, String email);
 }
