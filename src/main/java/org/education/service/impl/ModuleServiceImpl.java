@@ -6,7 +6,10 @@ import org.education.dto.module.EditModuleDto;
 import org.education.dto.module.ModuleDto;
 import org.education.dto.module.ModuleWithStageDto;
 import org.education.entity.Module;
+import org.education.entity.User;
 import org.education.repository.ModuleRepository;
+import org.education.repository.UserRepository;
+import org.education.repository.criteria.ModuleCriteriaRepository;
 import org.education.service.ModuleService;
 import org.education.service.mapper.ModuleMapper;
 import org.education.service.mapper.StageMapper;
@@ -21,6 +24,8 @@ public class ModuleServiceImpl implements ModuleService {
     private final ModuleRepository moduleRepository;
     private final ModuleMapper moduleMapper;
     private final StageMapper stageMapper;
+    private final UserRepository userRepository;
+    private final ModuleCriteriaRepository moduleCriteriaRepository;
 
     @Override
     public Integer createModule(Integer courceId, CreateModuleDto createModule) {
@@ -67,5 +72,12 @@ public class ModuleServiceImpl implements ModuleService {
                 m.getCourceId(),
                 stageMapper.mapStageToStageDto(m.getStages())
         )).toList();
+    }
+
+    @Override
+    public List<ModuleWithStageDto> getAllByCourceIdAndUserId(Integer courceId, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+
+        return moduleCriteriaRepository.getAllByCourceIdAndUserId(courceId, user.getId());
     }
 }

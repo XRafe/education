@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -25,6 +27,9 @@ public class Chat {
 
     @Column(name = "cource_id")
     private Integer courceId;
+
+    @OneToMany(mappedBy = "chat")
+    private Set<Message> messages;
 
     public Chat(Integer courceId) {
         this.courceId = courceId;

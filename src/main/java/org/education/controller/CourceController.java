@@ -3,11 +3,13 @@ package org.education.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.education.cookie.ActionWithCookie;
+import org.education.dto.chat.ChatDto;
 import org.education.dto.cource.CourceDto;
 import org.education.dto.cource.CreateCourceDto;
 import org.education.dto.cource.EditCourceDto;
 import org.education.dto.cource.SubscribeCourceDto;
 import org.education.jwt.ActionWithJwt;
+import org.education.service.ChatService;
 import org.education.service.CourceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ public class CourceController {
     private final CourceService courceService;
     private final ActionWithJwt actionWithJwt;
     private final ActionWithCookie actionWithCookie;
+    private final ChatService chatService;
 
     @PostMapping("/create")
     public Integer createCourceWithChat(HttpServletRequest httpServletRequest, CreateCourceDto createCourceDto) {
@@ -61,5 +64,13 @@ public class CourceController {
         String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
         String email = actionWithJwt.getEmailByToken(token);
         return courceService.getListSubscribeUser(email);
+    }
+
+    @GetMapping("/chat/list")
+    public List<ChatDto> getAllChatByUserId(HttpServletRequest httpServletRequest) {
+        String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
+        String email = actionWithJwt.getEmailByToken(token);
+
+        return chatService.getAllByUserId(email);
     }
 }

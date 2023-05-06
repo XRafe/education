@@ -1,10 +1,13 @@
 package org.education.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.education.cookie.ActionWithCookie;
 import org.education.dto.module.CreateModuleDto;
 import org.education.dto.module.EditModuleDto;
 import org.education.dto.module.ModuleDto;
 import org.education.dto.module.ModuleWithStageDto;
+import org.education.jwt.ActionWithJwt;
 import org.education.service.ModuleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ModuleController {
 
+    private final ActionWithJwt actionWithJwt;
+    private final ActionWithCookie actionWithCookie;
     private final ModuleService moduleService;
 
     @PostMapping("cource/{courceId}/module/create")
@@ -42,5 +47,12 @@ public class ModuleController {
     @GetMapping("cource/{courceId}/module/list")
     public List<ModuleWithStageDto> getAllByCourceId(@PathVariable("courceId") Integer courceId) {
         return moduleService.getAllByCourceId(courceId);
+    }
+
+    @GetMapping("cource/{courceId}/module/list/subscribe")
+    public List<ModuleWithStageDto> getAllByCourceIdAndUserId(HttpServletRequest httpServletRequest, @PathVariable("courceId") Integer courceId) {
+        String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
+        String email = actionWithJwt.getEmailByToken(token);
+        return moduleService.getAllByCourceIdAndUserId(courceId, email);
     }
 }

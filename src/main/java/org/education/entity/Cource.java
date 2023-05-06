@@ -40,11 +40,14 @@ public class Cource {
     @Column(name = "creator_id")
     private Integer creatorId;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cource")
     private Set<Module> modules;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cource")
     private Set<UserCources> userCources;
+
+    @OneToOne(mappedBy = "cource")
+    private Chat chat;
 
     public Cource(String title, String info, String imageUrl, Integer usersCount,
                   Integer rating, String direction, Integer creatorId) {

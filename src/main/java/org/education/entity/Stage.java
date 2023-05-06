@@ -38,7 +38,7 @@ public class Stage {
     @Column(name = "module_id")
     private Integer moduleId;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stage")
     private Set<StageResult> stageResults;
 
     public Stage(String title, String info, String data, String type, Integer score, Integer moduleId) {

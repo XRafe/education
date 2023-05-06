@@ -48,6 +48,13 @@ public class UserCourcesServiceImpl implements UserCourcesService {
 
         courceRepository.saveAndFlush(cource);
         userCourcesRepository.delete(userCources);
-
     }
+
+    @Override
+    public boolean checkSubscribeOnCource(Integer courceId, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+        return userCourcesRepository.existsByUserIdAndCourceId(user.getId(), courceId);
+    }
+
+
 }

@@ -18,4 +18,6 @@ public interface ModuleService {
     void deleteModule(Integer id);
 
     List<ModuleWithStageDto> getAllByCourceId(Integer courceId);
+
+    List<ModuleWithStageDto> getAllByCourceIdAndUserId(Integer courceId, String email);
 }
