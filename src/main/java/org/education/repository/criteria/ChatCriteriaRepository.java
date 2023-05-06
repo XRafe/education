@@ -25,7 +25,7 @@ public class ChatCriteriaRepository {
         Join<UserCources, Cource> userCourcesCourceJoin = root.join("cource", JoinType.INNER);
         Join<UserCources, User> userJoin = root.join("user", JoinType.INNER);
         Join<Cource, Chat> chatJoin = userCourcesCourceJoin.join("chat", JoinType.INNER);
-        Join<Chat, Message> messageJoin = chatJoin.join("messages", JoinType.INNER);
+        Join<Chat, Message> messageJoin = chatJoin.join("messages", JoinType.LEFT);
 
         Predicate predicate = cb.equal(root.get("userId"), userId);
 
@@ -40,7 +40,7 @@ public class ChatCriteriaRepository {
                 m.getCource().getImageUrl(),
                 m.getCource().getChat()
                         .getMessages()
-                        .stream().map(c -> c.getText())
+                        .stream().map(Message::getText)
                         .reduce((first, second) -> second).orElse(null)
         )).toList();
     }

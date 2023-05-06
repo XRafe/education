@@ -35,9 +35,9 @@ public class Message {
     @Column(name = "chat_id")
     private Integer chatId;
 
-    public Message(String text, User user, Integer chatId) {
+    public Message(String text, Integer userId, Integer chatId) {
         this.text = text;
-        this.user = user;
+        this.userId = userId;
         this.chatId = chatId;
     }
 }
