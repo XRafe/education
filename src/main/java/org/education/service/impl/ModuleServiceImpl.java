@@ -12,7 +12,6 @@ import org.education.repository.UserRepository;
 import org.education.repository.criteria.ModuleCriteriaRepository;
 import org.education.service.ModuleService;
 import org.education.service.mapper.ModuleMapper;
-import org.education.service.mapper.StageMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +22,6 @@ public class ModuleServiceImpl implements ModuleService {
 
     private final ModuleRepository moduleRepository;
     private final ModuleMapper moduleMapper;
-    private final StageMapper stageMapper;
     private final UserRepository userRepository;
     private final ModuleCriteriaRepository moduleCriteriaRepository;
 
@@ -64,20 +62,14 @@ public class ModuleServiceImpl implements ModuleService {
     @Override
     public List<ModuleWithStageDto> getAllByCourceId(Integer courceId) {
         List<Module> list = moduleRepository.findAllByCourceId(courceId);
-        return list.stream().map(m -> new ModuleWithStageDto(
-                m.getId(),
-                m.getTitle(),
-                m.getInfo(),
-                m.getScore(),
-                m.getCourceId(),
-                stageMapper.mapStageToStageDto(m.getStages())
-        )).toList();
+        return moduleMapper.mapModuleToModuleWithStageDto(list);
     }
 
     @Override
     public List<ModuleWithStageDto> getAllByCourceIdAndUserId(Integer courceId, String email) {
         User user = userRepository.findByEmail(email).orElseThrow();
+        List<Module> list = moduleCriteriaRepository.getAllByCourceIdAndUserId(courceId, user.getId());
 
-        return moduleCriteriaRepository.getAllByCourceIdAndUserId(courceId, user.getId());
+        return moduleMapper.mapModuleToModuleWithStageDto(list);
     }
 }
