@@ -32,10 +32,14 @@ public class ActionWithJwt {
     }
 
     public boolean validateToken(String token) {
-        JWTVerifier jwtVerifier = JWT.require(algorithm)
-                .withIssuer(getEmailByToken(token))
-                .build();
-        jwtVerifier.verify(token);
+        try {
+            JWTVerifier jwtVerifier = JWT.require(algorithm)
+                    .withIssuer(getEmailByToken(token))
+                    .build();
+            jwtVerifier.verify(token);
+        } catch (Exception msg) {
+            return false;
+        }
         return true;
     }
 
