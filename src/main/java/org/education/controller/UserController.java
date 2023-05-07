@@ -29,12 +29,8 @@ public class UserController {
     }
 
     @PostMapping("/authenticated")
-    public ResponseEntity<String> authenticatedUser(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest,
+    public ResponseEntity<String> authenticatedUser(HttpServletResponse httpServletResponse,
                                                     @RequestBody AuthenticatedUserDto authenticatedUserDto) {
-
-        String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
-        String email = actionWithJwt.getEmailByToken(token);
-
         actionWithCookie.createCookie(httpServletResponse, userService.authenticatedUser(authenticatedUserDto));
         return new ResponseEntity<>("Добро пожаловать " + authenticatedUserDto.getEmail(),
                 HttpStatus.OK);
