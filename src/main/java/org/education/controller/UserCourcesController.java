@@ -40,7 +40,10 @@ public class UserCourcesController {
     }
 
     @GetMapping("/{courceId}/subscribe/check")
-    public boolean checkSubscribeOnCource(Integer courceId, String email) {
+    public boolean checkSubscribeOnCource(HttpServletRequest httpServletRequest, Integer courceId) {
+        String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
+        String email = actionWithJwt.getEmailByToken(token);
+
         return userCourcesService.checkSubscribeOnCource(courceId, email);
     }
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
-import org.education.entity.Chat;
 import org.education.entity.Message;
 import org.education.entity.User;
 import org.springframework.stereotype.Component;

@@ -16,13 +16,14 @@ public class StageController {
     private final StageService stageService;
 
     @PostMapping("module/{moduleId}/stage/create")
-    public Integer createStage(@PathVariable("moduleId") Integer moduleId, CreateStageDto createStageDto) {
+    public Integer createStage(@PathVariable("moduleId") Integer moduleId,
+                               @RequestBody CreateStageDto createStageDto) {
         return stageService.createStage(moduleId, createStageDto);
     }
 
     @PutMapping("module/stage/{id}/edit")
     public ResponseEntity<StageDto> editStage(@PathVariable("id") Integer id,
-                                              EditStageDto editStageDto) {
+                                              @RequestBody EditStageDto editStageDto) {
         return new ResponseEntity<>(stageService.editStage(id, editStageDto), HttpStatus.OK);
     }
 

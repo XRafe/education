@@ -12,10 +12,7 @@ import org.education.jwt.ActionWithJwt;
 import org.education.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -27,20 +24,25 @@ public class UserController {
     private final ActionWithJwt actionWithJwt;
 
     @PostMapping("/registration")
-    public ResponseEntity<UserDto> registrationUser(RegistrationUserDto registrationUserDto) {
+    public ResponseEntity<UserDto> registrationUser(@RequestBody RegistrationUserDto registrationUserDto) {
         return new ResponseEntity<>(userService.registrationUser(registrationUserDto), HttpStatus.OK);
     }
 
     @PostMapping("/authenticated")
-    public ResponseEntity<String> authenticatedUser(HttpServletResponse httpServletResponse,
-                                                    AuthenticatedUserDto authenticatedUserDto) {
+    public ResponseEntity<String> authenticatedUser(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest,
+                                                    @RequestBody AuthenticatedUserDto authenticatedUserDto) {
+
+        String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
+        String email = actionWithJwt.getEmailByToken(token);
+
         actionWithCookie.createCookie(httpServletResponse, userService.authenticatedUser(authenticatedUserDto));
         return new ResponseEntity<>("Добро пожаловать " + authenticatedUserDto.getEmail(),
                 HttpStatus.OK);
     }
 
     @PutMapping("/edit")
-    public ResponseEntity editUser(HttpServletRequest httpServletRequest, EditUserDto editUserDto) {
+    public ResponseEntity editUser(HttpServletRequest httpServletRequest,
+                                   @RequestBody EditUserDto editUserDto) {
         String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
         String email = actionWithJwt.getEmailByToken(token);
 

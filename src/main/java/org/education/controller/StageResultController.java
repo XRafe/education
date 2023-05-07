@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.education.dto.stage.result.CreateStageResultDto;
 import org.education.service.StageResultService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ public class StageResultController {
     private final StageResultService stageResultService;
 
     @PostMapping
-    public Integer createOrUpdateStageResult(CreateStageResultDto createStageResultDto) {
+    public Integer createOrUpdateStageResult(@RequestBody CreateStageResultDto createStageResultDto) {
         return stageResultService.createOrUpdateStageResult(createStageResultDto);
     }
 }

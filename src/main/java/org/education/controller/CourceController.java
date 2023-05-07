@@ -28,7 +28,8 @@ public class CourceController {
     private final ChatService chatService;
 
     @PostMapping("/create")
-    public Integer createCourceWithChat(HttpServletRequest httpServletRequest, CreateCourceDto createCourceDto) {
+    public Integer createCourceWithChat(HttpServletRequest httpServletRequest,
+                                        @RequestBody CreateCourceDto createCourceDto) {
         String token = actionWithCookie.getTokenFromRequest(httpServletRequest);
         String email = actionWithJwt.getEmailByToken(token);
 
@@ -42,7 +43,7 @@ public class CourceController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<CourceDto> editCource(@PathVariable("id") Integer id,
-                                                EditCourceDto editCourceDto) {
+                                                @RequestBody EditCourceDto editCourceDto) {
         return new ResponseEntity<>(courceService.editCource(id, editCourceDto), HttpStatus.OK);
     }
 

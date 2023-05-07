@@ -24,13 +24,14 @@ public class ModuleController {
     private final ModuleService moduleService;
 
     @PostMapping("cource/{courceId}/module/create")
-    public Integer createModule(@PathVariable("courceId") Integer courceId, CreateModuleDto createModuleDto) {
+    public Integer createModule(@PathVariable("courceId") Integer courceId,
+                                @RequestBody CreateModuleDto createModuleDto) {
         return moduleService.createModule(courceId, createModuleDto);
     }
 
     @PutMapping("cource/module/{id}/edit")
     public ResponseEntity<ModuleDto> editModule(@PathVariable("id") Integer id,
-                                                EditModuleDto editModuleDto) {
+                                                @RequestBody EditModuleDto editModuleDto) {
         return new ResponseEntity<>(moduleService.editModule(id, editModuleDto), HttpStatus.OK);
     }
 
