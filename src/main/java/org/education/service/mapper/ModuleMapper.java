@@ -3,6 +3,7 @@ package org.education.service.mapper;
 import lombok.RequiredArgsConstructor;
 import org.education.dto.module.ModuleDto;
 import org.education.dto.module.ModuleWithStageDto;
+import org.education.dto.module.ModuleWithStageResultDto;
 import org.education.entity.Module;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,17 @@ public class ModuleMapper {
                 m.getScore(),
                 m.getCourceId(),
                 stageMapper.mapStageToStageDto(m.getStages())
+        )).toList();
+    }
+
+    public List<ModuleWithStageResultDto> mapModuleToModuleWithStageResultDto(Collection<Module> modules) {
+        return modules.stream().map(m -> new ModuleWithStageResultDto(
+                m.getId(),
+                m.getTitle(),
+                m.getInfo(),
+                m.getScore(),
+                m.getCourceId(),
+                stageMapper.mapStageToStageWithResultDto(m.getStages())
         )).toList();
     }
 }

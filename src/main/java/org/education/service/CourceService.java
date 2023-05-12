@@ -19,4 +19,6 @@ public interface CourceService {
     List<CourceDto> getAllByUserId(String email);
 
     List<SubscribeCourceDto> getListSubscribeUser(String email);
+
+    void deleteCource(Integer id);
 }

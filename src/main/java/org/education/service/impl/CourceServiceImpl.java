@@ -86,4 +86,9 @@ public class CourceServiceImpl implements CourceService {
         User user = userRepository.findByEmail(email).orElseThrow();
         return courceCriteriaRepository.getListSubscribeUser(user.getId());
     }
+
+    @Override
+    public void deleteCource(Integer id) {
+        courceRepository.deleteById(id);
+    }
 }

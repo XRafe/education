@@ -74,4 +74,10 @@ public class CourceController {
 
         return chatService.getAllByUserId(email);
     }
+
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity deleteCource(Integer id) {
+        courceService.deleteCource(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -1,9 +1,6 @@
 package org.education.service;
 
-import org.education.dto.module.CreateModuleDto;
-import org.education.dto.module.EditModuleDto;
-import org.education.dto.module.ModuleDto;
-import org.education.dto.module.ModuleWithStageDto;
+import org.education.dto.module.*;
 
 import java.util.List;
 
@@ -19,5 +16,5 @@ public interface ModuleService {
 
     List<ModuleWithStageDto> getAllByCourceId(Integer courceId);
 
-    List<ModuleWithStageDto> getAllByCourceIdAndUserId(Integer courceId, String email);
+    List<ModuleWithStageResultDto> getAllByCourceIdAndUserId(Integer courceId, String email);
 }

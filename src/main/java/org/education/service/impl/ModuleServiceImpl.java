@@ -1,10 +1,7 @@
 package org.education.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.education.dto.module.CreateModuleDto;
-import org.education.dto.module.EditModuleDto;
-import org.education.dto.module.ModuleDto;
-import org.education.dto.module.ModuleWithStageDto;
+import org.education.dto.module.*;
 import org.education.entity.Module;
 import org.education.entity.User;
 import org.education.repository.ModuleRepository;
@@ -68,10 +65,10 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
-    public List<ModuleWithStageDto> getAllByCourceIdAndUserId(Integer courceId, String email) {
+    public List<ModuleWithStageResultDto> getAllByCourceIdAndUserId(Integer courceId, String email) {
         User user = userRepository.findByEmail(email).orElseThrow();
-        List<Module> list = moduleCriteriaRepository.getAllByCourceIdAndUserId(courceId, user.getId());
+        List<Module> list = moduleCriteriaRepository.getAllByCourceWithStageResultIdAndUserId(courceId, user.getId());
 
-        return moduleMapper.mapModuleToModuleWithStageDto(list);
+        return moduleMapper.mapModuleToModuleWithStageResultDto(list);
     }
 }
