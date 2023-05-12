@@ -42,6 +42,8 @@ public class ModuleServiceImpl implements ModuleService {
     public ModuleDto editModule(Integer id, EditModuleDto editModule) {
         Module module = moduleRepository.findById(id).orElseThrow();
 
+        module.setTitle(editModule.getTitle());
+        module.setInfo(editModule.getInfo());
 
         moduleRepository.saveAndFlush(module);
 
