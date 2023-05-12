@@ -1,5 +1,5 @@
-ALTER TABLE education.stage
+ALTER TABLE if exists education.stage
     ALTER COLUMN "data" TYPE varchar USING "data"::varchar;
 
-ALTER TABLE education.stage_result
+ALTER TABLE if exists education.stage_result
     ALTER COLUMN answer TYPE varchar USING answer::varchar;
