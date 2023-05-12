@@ -9,6 +9,7 @@ import org.education.repository.StageRepository;
 import org.education.service.StageService;
 import org.education.service.mapper.StageMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,8 @@ public class StageServiceImpl implements StageService {
     private final StageRepository stageRepository;
     private final StageMapper stageMapper;
 
+
+    @Transactional
     @Override
     public Integer createStage(Integer moduleId, CreateStageDto createStage) {
         Stage stage = new Stage(
@@ -32,6 +35,8 @@ public class StageServiceImpl implements StageService {
         return stage.getId();
     }
 
+
+    @Transactional
     @Override
     public StageDto editStage(Integer id, EditStageDto editStage) {
         Stage stage = stageRepository.findById(id).orElseThrow();
@@ -46,6 +51,8 @@ public class StageServiceImpl implements StageService {
         return stageMapper.mapStageToStageDto(stage);
     }
 
+
+    @Transactional
     @Override
     public void deleteStage(Integer id) {
         stageRepository.deleteById(id);

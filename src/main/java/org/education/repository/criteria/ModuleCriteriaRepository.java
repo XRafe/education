@@ -4,8 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
-import org.education.entity.*;
 import org.education.entity.Module;
+import org.education.entity.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

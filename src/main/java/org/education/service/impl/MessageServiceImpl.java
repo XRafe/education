@@ -11,6 +11,7 @@ import org.education.repository.UserRepository;
 import org.education.repository.criteria.MessageCriteriaRepository;
 import org.education.service.MessageService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class MessageServiceImpl implements MessageService {
     private final UserRepository userRepository;
     private final MessageCriteriaRepository messageCriteriaRepository;
 
+
+    @Transactional
     @Override
     public void sendMessage(Integer chatId, String userEmail, String text) {
         Chat chat = chatRepository.findById(chatId).orElseThrow();

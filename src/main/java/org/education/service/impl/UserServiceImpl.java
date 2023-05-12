@@ -11,6 +11,7 @@ import org.education.repository.UserRepository;
 import org.education.service.UserService;
 import org.education.service.mapper.UserMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,8 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final ActionWithJwt actionWithJwt;
 
+
+    @Transactional
     @Override
     public UserDto registrationUser(RegistrationUserDto registrationUserDto) {
         User user = new User(
@@ -34,6 +37,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.mapUserToUserDto(user);
     }
 
+
+    @Transactional
     @Override
     public String authenticatedUser(AuthenticatedUserDto authenticatedUserDto) {
         User user = userRepository.findByEmail(authenticatedUserDto.getEmail())

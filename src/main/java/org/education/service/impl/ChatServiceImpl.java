@@ -9,6 +9,7 @@ import org.education.repository.UserRepository;
 import org.education.repository.criteria.ChatCriteriaRepository;
 import org.education.service.ChatService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class ChatServiceImpl implements ChatService {
     private final UserRepository userRepository;
     private final ChatCriteriaRepository chatCriteriaRepository;
 
+
+    @Transactional
     @Override
     public Integer createChat(Integer courceId) {
         Chat chat = new Chat(courceId);

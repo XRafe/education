@@ -10,6 +10,7 @@ import org.education.repository.criteria.ModuleCriteriaRepository;
 import org.education.service.ModuleService;
 import org.education.service.mapper.ModuleMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class ModuleServiceImpl implements ModuleService {
     private final UserRepository userRepository;
     private final ModuleCriteriaRepository moduleCriteriaRepository;
 
+
+    @Transactional
     @Override
     public Integer createModule(Integer courceId, CreateModuleDto createModule) {
         Module module = new Module(
@@ -35,6 +38,8 @@ public class ModuleServiceImpl implements ModuleService {
         return module.getId();
     }
 
+
+    @Transactional
     @Override
     public ModuleDto editModule(Integer id, EditModuleDto editModule) {
         Module module = moduleRepository.findById(id).orElseThrow();

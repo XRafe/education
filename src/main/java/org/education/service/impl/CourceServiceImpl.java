@@ -14,6 +14,7 @@ import org.education.service.ChatService;
 import org.education.service.CourceService;
 import org.education.service.mapper.CourceMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class CourceServiceImpl implements CourceService {
     private final CourceMapper courceMapper;
     private final CourceCriteriaRepository courceCriteriaRepository;
 
+
+    @Transactional
     @Override
     public Integer createCourceWithChat(CreateCourceDto createCource, String emailUser) {
         User user = userRepository.findByEmail(emailUser).orElseThrow();
@@ -53,6 +56,8 @@ public class CourceServiceImpl implements CourceService {
         return courceMapper.mapCourceToCourceDto(cource);
     }
 
+
+    @Transactional
     @Override
     public CourceDto editCource(Integer id, EditCourceDto editCource) {
         Cource cource = courceRepository.findById(id).orElseThrow();
@@ -87,6 +92,8 @@ public class CourceServiceImpl implements CourceService {
         return courceCriteriaRepository.getListSubscribeUser(user.getId());
     }
 
+
+    @Transactional
     @Override
     public void deleteCource(Integer id) {
         courceRepository.deleteById(id);

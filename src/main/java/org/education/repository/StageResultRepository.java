@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StageResultRepository extends JpaRepository<StageResult, Integer> {
+
+    boolean existsByUserIdAndStageId(Integer userId, Integer stageId);
+
+    StageResult findByUserIdAndStageId(Integer userId, Integer stageId);
 }
